@@ -252,28 +252,28 @@ public class LoopView extends View {
                     canvas.save();
                     //top = 0,left = (measuredWidth - maxTextWidth)/2
                     canvas.clipRect(0, 0, measuredWidth, firstLineY - translateY);
-                    drawCenter(canvas, paintA, as[j1],maxTextHeight);
+                    drawLeft(canvas, paintA, as[j1],maxTextHeight);
                     canvas.restore();
                     canvas.save();
                     canvas.clipRect(0, firstLineY - translateY, measuredWidth, (int) (itemHeight));
-                    drawCenter(canvas, paintB, as[j1], maxTextHeight);
+                    drawLeft(canvas, paintB, as[j1], maxTextHeight);
                     canvas.restore();
                 } else if (translateY <= secondLineY && maxTextHeight + translateY >= secondLineY) {
                     canvas.save();
                     canvas.clipRect(0, 0, measuredWidth, secondLineY - translateY);
-                    drawCenter(canvas, paintB, as[j1], maxTextHeight);
+                    drawLeft(canvas, paintB, as[j1], maxTextHeight);
                     canvas.restore();
                     canvas.save();
                     canvas.clipRect(0, secondLineY - translateY, measuredWidth, (int) (itemHeight));
-                    drawCenter(canvas, paintA, as[j1],maxTextHeight);
+                    drawLeft(canvas, paintA, as[j1],maxTextHeight);
                     canvas.restore();
                 } else if (translateY >= firstLineY && maxTextHeight + translateY <= secondLineY) {
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
-                    drawCenter(canvas, paintB, as[j1],maxTextHeight);
+                    drawLeft(canvas, paintB, as[j1],maxTextHeight);
                     selectedItem = arrayList.indexOf(as[j1]);
                 } else {
                     canvas.clipRect(0, 0, measuredWidth, (int) (itemHeight));
-                    drawCenter(canvas, paintA, as[j1],maxTextHeight);
+                    drawLeft(canvas, paintA, as[j1],maxTextHeight);
                 }
                 canvas.restore();
             }
@@ -291,6 +291,15 @@ public class LoopView extends View {
         paint.getTextBounds(text, 0, text.length(), r);
         float x = cWidth / 2f - r.width() / 2f - r.left;
         canvas.drawText(text, x, y, paint);
+    }
+    
+        private void drawLeft(Canvas canvas, Paint paint, String text, int y) {
+        canvas.getClipBounds(r);
+        int cWidth = r.width();
+        paint.setTextAlign(Paint.Align.LEFT);
+        paint.getTextBounds(text, 0, text.length(), r);
+        float x = cWidth / 2f - r.width() / 2f - r.left;
+        canvas.drawText(text, 0, y, paint);
     }
 
     @Override
