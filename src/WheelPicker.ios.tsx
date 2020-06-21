@@ -15,6 +15,7 @@ const WheelPicker: React.FC<Props> = props => {
     <View pointerEvents={disabled ? "none" : "auto"}>
       <Picker
         {...props}
+        itemStyle={{ textAlign: 'left'}}
         selectedValue={data[selectedItem]}
         onValueChange={(value, index): void => {
           if (onItemSelected) onItemSelected(index);
@@ -22,7 +23,7 @@ const WheelPicker: React.FC<Props> = props => {
         }}
       >
         {data.map((i, index) => (
-          <Picker.Item key={index} label={i} value={i} />
+          <Picker.Item key={index} label={i} value={i} color={selectedItem === index?'white': 'black'}/>
         ))}
       </Picker>
     </View>
